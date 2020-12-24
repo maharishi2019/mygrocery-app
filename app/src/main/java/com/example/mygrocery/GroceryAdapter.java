@@ -1,6 +1,7 @@
 package com.example.mygrocery;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,14 +9,17 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.example.mygrocery.data.GroceryDatabase;
+import com.example.mygrocery.data.HomeDatabase;
 
 import java.util.ArrayList;
 
 public class GroceryAdapter extends BaseAdapter {
+    public static String groceryBeingAdded = "";
     private ArrayList<String> list = new ArrayList<String>();
     private Context context;
 
@@ -52,7 +56,7 @@ public class GroceryAdapter extends BaseAdapter {
         listItemText.setText(list.get(position));
 
         Button deleteBtn = (Button)view.findViewById(R.id.delete_btn);
-
+        Button groceryBoughtBtn = (Button)view.findViewById(R.id.grocerybought_btn);
         deleteBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -64,6 +68,18 @@ public class GroceryAdapter extends BaseAdapter {
             }
         });
 
+        groceryBoughtBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                NavController navController = Navigation.findNavController(v);
+                GroceryDatabase db = GroceryDatabase.getDBInstance(context.getApplicationContext());
+                HomeDatabase homedb = HomeDatabase.getDBInstance(context.getApplicationContext());
+                groceryBeingAdded = listItemText.getText().toString();
+                db.groceryDao().deleteGrocery(listItemText.getText().toString());
+                notifyDataSetChanged();
+                navController.navigate(R.id.action_groceryFragment_to_doneGrocery);
+            }
+        });
         return view;
     }
 }

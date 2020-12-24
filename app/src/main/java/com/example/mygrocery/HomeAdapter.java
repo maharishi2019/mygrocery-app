@@ -1,6 +1,7 @@
 package com.example.mygrocery;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,14 +53,14 @@ public class HomeAdapter extends BaseAdapter {
         TextView listItemText = (TextView)view.findViewById(R.id.textView);
         listItemText.setText(list.get(position));
 
-        Button deleteBtn = (Button)view.findViewById(R.id.delete_btn);
+        Button deleteBtn = (Button)view.findViewById(R.id.home_delete_btn);
 
         deleteBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 NavController navController = Navigation.findNavController(v);
                 HomeDatabase db = HomeDatabase.getDBInstance(context.getApplicationContext());
-                db.homeDao().deleteHomeItem(listItemText.getText().toString());
+                db.homeDao().deleteHomeItem(listItemText.getText().toString().split(" ")[0]);
                 notifyDataSetChanged();
                 navController.navigate(R.id.action_homeFragment_self);
             }

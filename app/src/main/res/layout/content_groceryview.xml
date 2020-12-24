@@ -12,16 +12,26 @@
         android:paddingLeft="8dp"
         android:textSize="18sp"
         android:textStyle="bold" />
-
     <Button
         android:id="@+id/delete_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint = "#B8BDB5"
+        android:layout_toLeftOf="@id/grocerybought_btn"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:drawableLeft="@drawable/ic_delete"
+        android:text="Delete" />
+
+    <Button
+        android:id="@+id/grocerybought_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint = "#B8BDB5"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="5dp"
-        android:drawableLeft="@drawable/ic_delete"
-        android:text="Delete"/>
+        android:drawableLeft="@drawable/ic_done"
+        android:text="Done"/>
 
 </RelativeLayout>

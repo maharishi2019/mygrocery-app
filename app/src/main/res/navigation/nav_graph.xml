@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_groceryFragment_self"
             app:destination="@id/groceryFragment" />
+        <action
+            android:id="@+id/action_groceryFragment_to_doneGrocery"
+            app:destination="@id/doneGrocery" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -52,5 +55,14 @@
         <action
             android:id="@+id/action_addHome_to_homeFragment"
             app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/doneGrocery"
+        android:name="com.example.mygrocery.DoneGrocery"
+        android:label="fragment_done_grocery"
+        tools:layout="@layout/fragment_done_grocery" >
+        <action
+            android:id="@+id/action_doneGrocery_to_groceryFragment"
+            app:destination="@id/groceryFragment" />
     </fragment>
 </navigation>

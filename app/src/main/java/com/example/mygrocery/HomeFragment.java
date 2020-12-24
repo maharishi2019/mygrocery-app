@@ -83,6 +83,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        createNotificationChannel();
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
@@ -116,7 +117,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 Notification notification = new NotificationCompat.Builder(this.getContext(), CHANNEL_ID)
                         .setSmallIcon(R.drawable.ic_grocery)
                         .setContentTitle("A Grocery At Home Has Expired!")
-                        .setContentText("Today's Date is "+currentDate+" and is unfortunately "+entryName+"'s expire date.")
+                        .setContentText(entryName+" has expired, added to grocery list.")
                         .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                         .build();
                 Log.d("notify", "notifying");
@@ -125,7 +126,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 Grocery new_grocery = new Grocery();
                 new_grocery.groceryItemName = entryName;
                 db_grocery.groceryDao().insertGrocery(new_grocery);
-
             }else{
                 myHomeList.add(entryName+" "+entryDate);
             }

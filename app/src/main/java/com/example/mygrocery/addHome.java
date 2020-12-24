@@ -91,8 +91,8 @@ public class addHome extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         HomeDatabase db = HomeDatabase.getDBInstance(this.getActivity().getApplicationContext());
         Home newItem = new Home();
-        newItem.homeItemName = homeName.getText().toString();
-        newItem.expireDate = expireDate.getText().toString();
+        newItem.homeItemName = homeName.getText().toString().trim();
+        newItem.expireDate = expireDate.getText().toString().trim();
         db.homeDao().insertHomeItem(newItem);
         navController.navigate(R.id.action_addHome_to_homeFragment);
     }
